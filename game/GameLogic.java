@@ -33,6 +33,11 @@ public class GameLogic {
                 System.out.print("Enter your guess: ");
                 String guess = scanner.nextLine().trim();
 
+                if (guess.length() > 5 || guess.length() < 5) {
+                    System.out.println("Your guess must be exactly 5 letters long");
+                    continue;
+                }
+
                 for (int i = 0; i < guess.length(); i++) {
                     char c = guess.charAt(i);
                     if (Character.isUpperCase(c)) {
@@ -52,9 +57,7 @@ public class GameLogic {
 
                 processGuess(guess);
 
-                if (guess.length() > 5 || guess.length() < 5) {
-                    System.out.println("Your guess must be exactly 5 letters long");
-                }
+               
 
                 if (guess.equals(secretWord)) {
                     System.out.println("Congratulations! You've guessed the word correctly.");

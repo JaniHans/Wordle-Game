@@ -1,6 +1,5 @@
 package game;
 
-import io.StatsManager;
 import java.util.Scanner;
 
 public class GameLogic {
@@ -31,8 +30,8 @@ public class GameLogic {
         public void startGame() {
             while (attempts < maxAttempts) {
                 System.out.println("\nAttempt " + (attempts + 1) + " of " + maxAttempts);
-                System.out.print("Enter your guess (5-letter word): ");
-                String guess = scanner.nextLine().trim().toUpperCase();
+                System.out.print("Enter your guess: ");
+                String guess = scanner.nextLine().trim();
 
                 if (!validateGuess(guess)) {
                     System.out.println("Invalid guess. Please enter a 5-letter word.");
@@ -41,9 +40,15 @@ public class GameLogic {
                 }
 
                 attempts++;
+
                 processGuess(guess);
+
+                if (guess.length() != 5) {
+                    System.out.println("Your guess must be exactly 5 letters long");
+                }
+
                 if (guess.equals(secretWord)) {
-                    System.out.println("Congratulations " + username + "! You guessed the word.");
+                    System.out.println("Congratulations! You've guessed the word correctly.");
                     win = true;
                     break;
                 }
@@ -75,11 +80,12 @@ public class GameLogic {
         public void endGame() {
             if (!win) {
                 System.out.println("Sorry, you've used all attempts. The secret word was: " + secretWord);
-
             }
-
+            // Optionally, display game stats to the user.
             displayStats();
-            StatsManager statsManager = new StatsManager();
+            
+            // Write the game stats to stats.csv regardless of win or loss.
+            io.StatsManager statsManager = new io.StatsManager();
             statsManager.writeStats(username, secretWord, attempts, win);
         }
 

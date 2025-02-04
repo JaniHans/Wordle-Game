@@ -5,32 +5,26 @@ import java.util.*;
 
 public class WordLoader {
     public List<String> loadWords(String filePath) {
-        // Read wordle-words.txt and return a list of words
         List<String> words = new ArrayList<>();
         File file = new File(filePath);
-
         if (!file.exists()) {
             System.out.println("Word list file not found: " + filePath);
             return words;
         }
-
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-        
             String line;
             while ((line = br.readLine()) != null) {
                 String word = line.trim();
                 if (word.length() == 5) {
-                    words.add(word.toUpperCase());
+                    // Keep the word in its original (lowercase) form
+                    words.add(word);
                 }
             }
         } catch (IOException e) {
             System.out.println("Error reading word list: " + e.getMessage());
         }
-
         return words;
-
     }
-
     public String getWord(int index) {
         // Retrieve word at specified index
         List<String> words = loadWords("wordle-words.txt");

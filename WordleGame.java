@@ -18,18 +18,15 @@ public class WordleGame {
         WordLoader loader = new WordLoader();
 
         int wordIndex = 0;
-
         if (args.length > 0) {
-            try {
-                wordIndex = Integer.parseInt(args[0]);
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid argument. Using default index 0.");
-
-            }
-        } 
-        else {
-            System.out.println("No word index provided. Using default index 0");
-        }
+        try {
+        wordIndex = Integer.parseInt(args[0]);
+    }   catch (NumberFormatException e) {
+        System.out.println("Invalid argument. Using default index 0.");
+    }
+    }   else {
+        System.out.println("Please provide a number as command line argument");
+}
         String secretWord = loader.getWord(wordIndex);
 
         // Start the game
@@ -38,16 +35,19 @@ public class WordleGame {
         gameLogic.startGame();
 
         // option to view past stats
-        System.out.println("View past stats? (Y/N): ");
-        String response = scanner.nextLine().trim().toUpperCase();
-        if (response.equals("Y")) {
+        System.out.println("Do you want to see your stats? (yes/no): ");
+        String response = scanner.nextLine().trim();
+        if (response.equals("yes")) {
+            System.out.println("Stats for " + username + ":");
             StatsManager statsManager = new StatsManager();
             statsManager.readStats();
         }
 
 
-        // Let the program end naturally.
-        scanner.close();
+      // Prompt the user to press Enter to exit.
+    System.out.print("Press Enter to exit...");
+    scanner.nextLine();  // Wait for Enter key press.
+    scanner.close();
         
     }
 }

@@ -52,7 +52,7 @@ public class GameLogic {
 
                 processGuess(guess);
 
-                if (guess.length() != 5) {
+                if (guess.length() > 5 || guess.length() < 5) {
                     System.out.println("Your guess must be exactly 5 letters long");
                 }
 

@@ -33,6 +33,15 @@ public class GameLogic {
                 System.out.print("Enter your guess: ");
                 String guess = scanner.nextLine().trim();
 
+                for (int i = 0; i < guess.length(); i++) {
+                    char c = guess.charAt(i);
+                    if (Character.isUpperCase(c)) {
+                        System.out.println("Your guess must only contain lowercase letters");
+                        continue;
+                    }
+                    
+                }
+
                 if (!validateGuess(guess)) {
                     System.out.println("Invalid guess. Please enter a 5-letter word.");
                     continue;

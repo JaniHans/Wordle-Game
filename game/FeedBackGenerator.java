@@ -67,16 +67,4 @@ public class FeedBackGenerator {
         return sb.toString().trim();
     }
 
-    public static void main(String[] args) {
-        FeedBackGenerator fbGenerator = new FeedBackGenerator();
-        Set<String> guessedWords = new HashSet<>();
-        guessedWords.add("thumb");
-        guessedWords.add("wrong");
-
-        String feedback = fbGenerator.generateFeedback("beach", "thumb");
-        System.out.println("Feedback: " + feedback);
-
-        String remainingLetters = fbGenerator.getRemainingLetters(guessedWords);
-        System.out.println("Remaining Letters: " + remainingLetters);
-    }
 }

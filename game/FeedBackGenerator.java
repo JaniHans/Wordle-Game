@@ -1,5 +1,8 @@
 package game;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class FeedBackGenerator {
     public String generateFeedback(String guess, String secretWord) {
         char[] guessChars = guess.toCharArray();
@@ -41,5 +44,38 @@ public class FeedBackGenerator {
 
     public String formatOutput(String feedback) {
         return feedback;
+    }
+
+    public String getRemainingLetters(Set<String> guessedWords) {
+        Set<Character> remainingLetters = new HashSet<>();
+        for (char c = 'A'; c <= 'Z'; c++) {
+            remainingLetters.add(c);
+        }
+
+        for (String word : guessedWords) {
+            for (char c : word.toCharArray()) {
+                remainingLetters.remove(Character.toUpperCase(c));
+            }
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (char c : remainingLetters) {
+            sb.append(c).append(" ");
+        }
+
+        return sb.toString().trim();
+    }
+
+    public static void main(String[] args) {
+        FeedBackGenerator fbGenerator = new FeedBackGenerator();
+        Set<String> guessedWords = new HashSet<>();
+        guessedWords.add("thumb");
+        guessedWords.add("wrong");
+
+        String feedback = fbGenerator.generateFeedback("beach", "thumb");
+        System.out.println("Feedback: " + feedback);
+
+        String remainingLetters = fbGenerator.getRemainingLetters(guessedWords);
+        System.out.println("Remaining Letters: " + remainingLetters);
     }
 }

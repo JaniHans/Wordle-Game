@@ -3,7 +3,6 @@ import io.StatsManager;
 import io.WordLoader;
 import java.util.Scanner;
 
-
 public class WordleGame {
     public static void main(String[] args) {
         // Single scanner for lifetime of the program
@@ -27,31 +26,33 @@ public class WordleGame {
                 validInput = false;
             }
         } else {
-            System.out.println("Please provide a number as command line argument.");
+        
             validInput = false;
         }
 
+        String secretWord;
         if (validInput) {
-            String secretWord = loader.getWord(wordIndex);
-
-            // Start the game
-            GameLogic gameLogic = new GameLogic(username, secretWord, scanner);
-            gameLogic.startGame();
-    
-            // option to view past stats
-            System.out.println("Do you want to see your stats? (yes/no): ");
-            String response = scanner.nextLine().trim();
-            if (response.equals("yes")) {
-                StatsManager statsManager = new StatsManager();
-                statsManager.readStats(username);
-            }
+            secretWord = loader.getWord(wordIndex);
+        } else {
+            // Provide a default secret word or handle the error appropriately
+            secretWord = "apple"; // Default secret word
         }
 
+        // Start the game
+        GameLogic gameLogic = new GameLogic(username, secretWord, scanner);
+        gameLogic.startGame();
 
+        // option to view past stats
+        System.out.println("Do you want to see your stats? (yes/no): ");
+        String response = scanner.nextLine().trim();
+        if (response.equals("yes")) {
+            StatsManager statsManager = new StatsManager();
+            statsManager.readStats(username);
+        }
 
         // Prompt the user to press Enter to exit.
         System.out.print("Press Enter to exit...");
-        scanner.nextLine();  // Wait for Enter key press.
+        scanner.nextLine(); // Wait for Enter key press.
         scanner.close();
     }
 }

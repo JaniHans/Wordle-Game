@@ -29,35 +29,36 @@ public class GameLogic {
     
         public void startGame() {
             while (attempts < maxAttempts) {
-                System.out.println("\nAttempt " + (attempts + 1) + " of " + maxAttempts);
+                
                 System.out.print("Enter your guess: ");
                 String guess = scanner.nextLine().trim();
 
-                if (guess.length() > 5 || guess.length() < 5) {
+                if (guess.length() != 5) {
                     System.out.println("Your guess must be exactly 5 letters long");
                     continue;
                 }
 
+                boolean validGuess = true;
                 for (int i = 0; i < guess.length(); i++) {
                     char c = guess.charAt(i);
-                    if (Character.isUpperCase(c)) {
-                        System.out.println("Your guess must only contain lowercase letters");
-                        continue;
+                    if (!Character.isLowerCase(c) || Character.isDigit(c)) {
+                        System.out.println("Your guess must only contain lowercase letters.");
+                        validGuess = false;
+                        break;
                     }
-                    
+                }
+
+                if (!validGuess) {
+                    continue;
                 }
 
                 if (!validateGuess(guess)) {
-                    System.out.println("Invalid guess. Please enter a 5-letter word.");
+                    System.out.println("Invalid guess.");
                     continue;
-
                 }
 
-                attempts++;
-
                 processGuess(guess);
-
-               
+                attempts++;
 
                 if (guess.equals(secretWord)) {
                     System.out.println("Congratulations! You've guessed the word correctly.");
@@ -66,7 +67,6 @@ public class GameLogic {
                 }
             }
             endGame();
-     
         }
 
         public boolean validateGuess(String guess) {
@@ -78,27 +78,22 @@ public class GameLogic {
             System.out.println("Feedback: " + feedbackGenerator.formatOutput(feedback));
             letterTracker.updateTracker(guess);
             System.out.println("Remaining letters: " + letterTracker.getRemainingLetters());
+            System.out.println("Attempts remaining: " + (maxAttempts - attempts));
 
         }
 
-        public void displayStats() {
-            System.out.println("\nGame stats:");
-            System.out.println("Username: " + username);
-            System.out.println("Secret Word: " + secretWord);
-            System.out.println("Attempts: " + attempts);
-            System.out.println("Result: " + (win ? "win" : "loss"));
-        }
+ 
      
         public void endGame() {
             if (!win) {
                 System.out.println("Game over. The correct word was: " + secretWord);
             }
             // Optionally, display game stats to the user.
-            displayStats();
+            
             
             // Write the game stats to stats.csv regardless of win or loss.
             io.StatsManager statsManager = new io.StatsManager();
             statsManager.writeStats(username, secretWord, attempts, win);
         }
 
-    } 
+    }

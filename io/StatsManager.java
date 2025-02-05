@@ -16,44 +16,51 @@ public class StatsManager {
         }
     }
 
-    public void readStats() {
+    public void readStats(String username) {
         File file = new File(statsFile);
         if (!file.exists()) {
             System.out.println("No stats available.");
             return;
         }
-        System.out.println("\nPast Game Stats:");
+
         int totalAttempts = 0;
-        int count = 0;
-        int wins = 0;
+        int gamesPlayed = 0;
+        int gamesWon = 0;
+
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = br.readLine()) != null) {
-                System.out.println(line);
-                // Each line is expected to have: username,secretWord,attempts,win/loss
                 String[] parts = line.split(",");
-                if (parts.length >= 4) {
-                    try {
-                        totalAttempts += Integer.parseInt(parts[2]);
-                        count++;
-                    } catch (NumberFormatException e) {
-                        // Skip invalid attempt values.
-                    }
-                    if ("win".equalsIgnoreCase(parts[3].trim())) {
-                        wins++;
+                if (parts.length >= 4 && parts[0].equals(username)) {
+                    gamesPlayed++;
+                    totalAttempts += Integer.parseInt(parts[2]);
+                    if (parts[3].equals("win")) {
+                        gamesWon++;
                     }
                 }
             }
         } catch (IOException e) {
-            System.out.println("Error reading stats file: " + e.getMessage());
+            System.out.println("Error reading stats: " + e.getMessage());
+            return;
         }
-        
-        System.out.println(String.format("Games played: %d", count));
-        
-        if (count > 0) {
-            double average = (double) totalAttempts / count;
-            System.out.println("Average attempts per game: " + average);
+
+        if (gamesPlayed == 0) {
+            System.out.println("No stats available for " + username + ".");
+            return;
         }
-        System.out.println(String.format("Games won: %d", wins));
+
+        double averageAttempts = (double) totalAttempts / gamesPlayed;
+
+        System.out.println("Stats for " + username + ":");
+        System.out.println("Games played: " + gamesPlayed);
+        System.out.println("Games won: " + gamesWon);
+        System.out.println("Average attempts per game: " + averageAttempts);
+        System.out.println("Press Enter to exit...");
+
+        try {
+            System.in.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

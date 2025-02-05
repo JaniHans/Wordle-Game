@@ -22,10 +22,10 @@ public class WordleGame {
         try {
         wordIndex = Integer.parseInt(args[0]);
     }   catch (NumberFormatException e) {
-        System.out.println("Invalid command-line argument. Please launch with a valid number");
+        
     }
     }   else {
-        System.out.println("Invalid command-line argument. Please launch with a valid number");
+        System.out.println("Welcome to Wordle! Guess the 5-letter word");
 }
         String secretWord = loader.getWord(wordIndex);
 
@@ -38,9 +38,8 @@ public class WordleGame {
         System.out.println("Do you want to see your stats? (yes/no): ");
         String response = scanner.nextLine().trim();
         if (response.equals("yes")) {
-            System.out.println("Stats for " + username + ":");
             StatsManager statsManager = new StatsManager();
-            statsManager.readStats();
+            statsManager.readStats(username);
         }
 
 

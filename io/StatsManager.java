@@ -48,7 +48,8 @@ public class StatsManager {
             System.out.println("Error reading stats file: " + e.getMessage());
         }
         
-        System.out.println("Games played: " + count);
+        System.out.println("Games played: %d" + count);
+        
         if (count > 0) {
             double average = (double) totalAttempts / count;
             System.out.println("Average attempts per game: " + average);

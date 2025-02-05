@@ -22,7 +22,7 @@ public class WordleGame {
         try {
         wordIndex = Integer.parseInt(args[0]);
     }   catch (NumberFormatException e) {
-        System.out.println("Invalid argument. Using default index 0.");
+        System.out.println("Invalid command-line argument. Please launch with a valid number");
     }
     }   else {
         System.out.println("Invalid command-line argument. Please launch with a valid number");

@@ -19,8 +19,9 @@ public class GameLogic {
     private LetterTracker letterTracker;
     private boolean win;
     private Set<String> validWords; // Set to store valid words
+    private Set<String> guessesSoFar = new HashSet<>();
 
-    public GameLogic(String username, String secretWord, Scanner scanner) {
+    public GameLogic(String username, String secretWord, Scanner scanner, Set<String> validWords) {
         this.username = username;
         this.secretWord = secretWord;
         this.scanner = scanner;
@@ -94,10 +95,18 @@ public class GameLogic {
     }
 
     public void processGuess(String guess) {
+        // 1) Record the guess
+        guessesSoFar.add(guess);
+    
+        // 2) Generate feedback
         String feedback = feedbackGenerator.generateFeedback(guess, secretWord);
-        System.out.println("Feedback: " + feedbackGenerator.formatOutput(feedback));
-        letterTracker.updateTracker(guess);
-        System.out.println("Remaining letters: " + letterTracker.getRemainingLetters());
+        System.out.println("Feedback: " + feedback);
+    
+        // 3) Get updated remaining letters
+        String remainingLetters = feedbackGenerator.getRemainingLetters(guessesSoFar, secretWord);
+        System.out.println("Remaining letters: " + remainingLetters);
+    
+        attempts++;
         System.out.println("Attempts remaining: " + (maxAttempts - attempts));
     }
 

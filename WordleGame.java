@@ -25,7 +25,7 @@ public class WordleGame {
         System.out.println("Invalid argument. Using default index 0.");
     }
     }   else {
-        System.out.println("Please provide a number as command line argument");
+        System.out.println("Invalid command-line argument. Please launch with a valid number");
 }
         String secretWord = loader.getWord(wordIndex);
 

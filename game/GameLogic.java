@@ -91,7 +91,7 @@ public class GameLogic {
      
         public void endGame() {
             if (!win) {
-                System.out.println("Game over. The correct word was: " + secretWord);
+                System.out.println("Game over. The secret word was: " + secretWord);
             }
             // Optionally, display game stats to the user.
             displayStats();

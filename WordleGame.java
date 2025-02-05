@@ -23,10 +23,7 @@ public class WordleGame {
         int wordIndex = 0;
         boolean validInput = true;
 
-        if (args.length == 0) {
-            System.out.println("Please provide a number as command line argument");
-            return;
-        }
+
 
         if (args.length > 0) {
             try {

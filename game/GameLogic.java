@@ -29,7 +29,7 @@ public class GameLogic {
         this.feedbackGenerator = new FeedBackGenerator();
         this.letterTracker = new LetterTracker(secretWord);
         this.win = false;
-        this.validWords = loadValidWords("wordle-words.txt"); // Initialize the set of val
+        this.validWords = validWords; // Initialize the set of val
     }
     private Set<String> loadValidWords(String filePath) {
         Set<String> words = new HashSet<>();
@@ -77,7 +77,7 @@ public class GameLogic {
 
             // Process the guess
             processGuess(guess);
-            attempts++;
+
 
             // Check if the guess is correct
             if (guess.equals(secretWord)) {

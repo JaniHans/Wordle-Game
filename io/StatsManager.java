@@ -54,7 +54,7 @@ public class StatsManager {
         System.out.println("Stats for " + username + ":");
         System.out.println("Games played: " + gamesPlayed);
         System.out.println("Games won: " + gamesWon);
-        System.out.println("Average attempts per game: " + averageAttempts);
+        System.out.printf("Average attempts per game: %.1f", averageAttempts);
         System.out.println("Press Enter to exit...");
 
         try {

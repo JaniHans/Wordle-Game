@@ -40,7 +40,7 @@ public class FeedBackGenerator {
         }
 
         // Combine feedback tokens
-        return String.join(" ", feedback);
+        return String.join("", feedback);
     }
 
     public String formatOutput(String feedback) {

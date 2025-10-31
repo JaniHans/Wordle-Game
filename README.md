@@ -1,10 +1,10 @@
-# koodWordle
+# Wordle
 
 A command-line implementation of the popular word-guessing game Wordle, written in Java.
 
 ## Description
 
-koodWordle is a terminal-based Wordle game where players have 6 attempts to guess a 5-letter word. The game provides feedback after each guess and tracks player statistics.
+Wordle is a terminal-based Wordle game where players have 6 attempts to guess a 5-letter word. The game provides feedback after each guess and tracks player statistics.
 
 ## Features
 
@@ -66,24 +66,4 @@ koodWordle/
 - Java 8 or higher
 - `wordle-words.txt` file in the project directory
 
-## Cleaning Build Files
-
-To remove compiled `.class` files before committing to Git:
-
-**Windows (PowerShell):**
-```powershell
-Remove-Item -Path "*.class" -Force -ErrorAction SilentlyContinue
-Remove-Item -Path "game\*.class" -Force -ErrorAction SilentlyContinue
-Remove-Item -Path "io\*.class" -Force -ErrorAction SilentlyContinue
-Remove-Item -Path "model\*.class" -Force -ErrorAction SilentlyContinue
-Remove-Item -Path "out" -Recurse -Force -ErrorAction SilentlyContinue
-```
-
-**Linux/Mac:**
-```bash
-find . -name "*.class" -type f -delete
-rm -rf out/
-```
-
-The `.gitignore` file is configured to automatically exclude `.class` files and build directories from Git.
 
